@@ -7,6 +7,11 @@ metadata:
     # GKE LoadBalancer를 사용. Google CLoud
     kubernetes.io/ingress.class: "gce" 
 spec:
+  defaultBackend: 
+    service:
+      name: frontend
+      port:
+        number: 80
   rules:
     - http:
         paths:
