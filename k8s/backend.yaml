@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: cncf-backend:local
+          image: jungmk0720/cncf-backend
           ports:
             - containerPort: 8080
           # DB 설정은 Dockerfile의 ENV에서 이미 처리됨
