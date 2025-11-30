@@ -1,0 +1,42 @@
+# --------------------------------------
+# Java / Spring Boot / Gradle
+# --------------------------------------
+/backend/build/
+/backend/.gradle/
+/backend/out/
+/backend/bin/
+*.jar
+*.war
+
+# Spring Boot environment files
+application-local.yml
+application-secret.yml
+
+# --------------------------------------
+# Node / React
+# --------------------------------------
+/frontend/node_modules/
+/frontend/build/
+/frontend/.env
+
+# --------------------------------------
+# IDE / Tooling
+# --------------------------------------
+.idea/
+*.iml
+.vscode/
+*.swp
+*.log
+
+# --------------------------------------
+# OS / Cache
+# --------------------------------------
+.DS_Store
+Thumbs.db
+
+# --------------------------------------
+# Docker (optional but recommended)
+# --------------------------------------
+**/.dockerignore
+
+/db/

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: cncf-board
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_DB
+              value: cncf_board
+            - name: POSTGRES_USER
+              value: cncf_user
+            - name: POSTGRES_PASSWORD
+              value: password
+          # 간단한 dev용이라 volume은 생략 (Pod 날리면 데이터도 같이 날아감)
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: cncf-board
+spec:
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
+  type: ClusterIP
