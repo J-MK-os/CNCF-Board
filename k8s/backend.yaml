@@ -12,14 +12,12 @@ spec:
     metadata:
       labels:
         app: backend
-      # 롤아웃 강제 갱신 Annotation 추가
       annotations:
-        kubectl.kubernetes.io/restartedAt: "2025-12-01T07:49:00Z" # 현재 시간으로 값 변경
+        kubectl.kubernetes.io/restartedAt: "2025-12-01T08:29:00Z" # 현재 시간으로 값 변경
     spec:
       containers:
         - name: backend
           image: jungmk0720/cncf-backend:latest
-          # 이미지 캐시 무시 및 강제 다운로드
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -30,8 +28,6 @@ spec:
             requests:
               cpu: 100m
               memory: 512Mi
-          # # DB 설정은 Dockerfile의 ENV에서 이미 처리됨
-          # # (SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/cncf_board 등)
 
 ---
 
@@ -40,11 +36,13 @@ kind: Service
 metadata:
   name: backend
   namespace: cncf-board
+  annotations: 
+    cloud.google.com/neg-status: '{"health-check-path": "/"}'
 spec:
   selector:
     app: backend
   ports:
-    - name: http
-      port: 8080      # 클러스터 내부에서 쓰는 포트
-      targetPort: 8080  # 컨테이너 포트
-  type: ClusterIP     # NodePort → ClusterIP로 변경
+    - name: http    
+      port: 8080    
+      targetPort: 8080  
+  type: ClusterIP
