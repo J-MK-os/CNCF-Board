@@ -44,6 +44,7 @@ spec:
   selector:
     app: backend
   ports:
-    - port: 8080      # 클러스터 내부에서 쓰는 포트
+    - name: http
+      port: 8080      # 클러스터 내부에서 쓰는 포트
       targetPort: 8080  # 컨테이너 포트
   type: ClusterIP     # NodePort → ClusterIP로 변경
