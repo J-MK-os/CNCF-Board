@@ -39,5 +39,5 @@ spec:
   ports:
     - port: 8080        # 클러스터 내부에서 쓰는 포트
       targetPort: 8080  # 컨테이너 포트
-      nodePort: 30081   # 외부에서 접근용 포트 하나 지정
-  type: NodePort         # ClusterIP → NodePort
+      # nodePort: 30081   # 외부에서 접근용 포트 하나 지정
+  type: ClusterIP # NodePort
