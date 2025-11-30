@@ -12,12 +12,15 @@ spec:
     metadata:
       labels:
         app: backend
-      annotations: # 이 섹션을 추가합니다.
-        kubectl.kubernetes.io/restartedAt: "2025-12-01T07:10:00Z" # 이전 값보다 새로운 값으로 변경
+      # 롤아웃 강제 갱신 Annotation 추가
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-12-01T07:49:00Z" # 현재 시간으로 값 변경
     spec:
       containers:
         - name: backend
-          image: jungmk0720/cncf-backend
+          image: jungmk0720/cncf-backend:latest
+          # 이미지 캐시 무시 및 강제 다운로드
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           resources:
@@ -27,9 +30,11 @@ spec:
             requests:
               cpu: 100m
               memory: 512Mi
-          # DB 설정은 Dockerfile의 ENV에서 이미 처리됨
-          # (SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/cncf_board 등)
+          # # DB 설정은 Dockerfile의 ENV에서 이미 처리됨
+          # # (SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/cncf_board 등)
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -39,7 +44,6 @@ spec:
   selector:
     app: backend
   ports:
-    - port: 8080        # 클러스터 내부에서 쓰는 포트
+    - port: 8080      # 클러스터 내부에서 쓰는 포트
       targetPort: 8080  # 컨테이너 포트
-      # nodePort: 30081   # 외부에서 접근용 포트 하나 지정
-  type: ClusterIP # NodePort
+  type: ClusterIP     # NodePort → ClusterIP로 변경
