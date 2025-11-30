@@ -11,7 +11,7 @@ COPY . .
 
 # 백엔드 API 주소 (K8s backend Service 기준)
 # ENV REACT_APP_API_BASE=http://backend:8080
-ENV REACT_APP_API_BASE=http://localhost:30081
+# ENV REACT_APP_API_BASE=http://localhost:30081
 
 # 프로덕션 빌드
 RUN npm run build
