@@ -25,6 +25,13 @@ spec:
               value: cncf_user
             - name: POSTGRES_PASSWORD
               value: password
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
           # 간단한 dev용이라 volume은 생략 (Pod 날리면 데이터도 같이 날아감)
 ---
 apiVersion: v1
