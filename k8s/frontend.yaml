@@ -18,6 +18,13 @@ spec:
           image: jungmk0720/cncf-frontend
           ports:
             - containerPort: 80
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
 ---
 apiVersion: v1
 kind: Service

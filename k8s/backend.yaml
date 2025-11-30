@@ -18,6 +18,13 @@ spec:
           image: jungmk0720/cncf-backend
           ports:
             - containerPort: 8080
+          resources:
+            limits:
+              cpu: 100m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 512Mi
           # DB 설정은 Dockerfile의 ENV에서 이미 처리됨
           # (SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/cncf_board 등)
 ---
