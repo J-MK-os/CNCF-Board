@@ -12,13 +12,14 @@ spec:
     metadata:
       labels:
         app: frontend
-      annotations: # 이 섹션을 추가합니다.
-        kubectl.kubernetes.io/restartedAt: "2025-12-01T07:10:00Z" # 이전 값보다 새로운 값으로 변경
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2025-12-01T07:58:00Z" # 현재 시간으로 값 변경
     spec:
       containers:
         - name: frontend
-          image: jungmk0720/cncf-frontend:latest 
-          imagePullPolicy: Always
+          image: jungmk0720/cncf-frontend:latest
+          # 이미지 캐시 무시 (image와 같은 레벨)
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           resources:
@@ -28,7 +29,9 @@ spec:
             requests:
               cpu: 100m
               memory: 512Mi
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -38,7 +41,6 @@ spec:
   selector:
     app: frontend
   ports:
-    - port: 80
-      targetPort: 80
-      # nodePort: 30080
-  type: ClusterIP # NodePort
+    - port: 80      # 클러스터 내부에서 쓰는 포트
+      targetPort: 80  # 컨테이너 포트
+  type: ClusterIP     # NodePort → ClusterIP로 변경
