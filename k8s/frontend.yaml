@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: jungmk0720/cncf-frontend
+          image: jungmk0720/cncf-frontend:latest 
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           resources:
