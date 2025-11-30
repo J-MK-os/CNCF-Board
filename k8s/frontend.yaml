@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: frontend
+      annotations: # 이 섹션을 추가합니다.
+        kubectl.kubernetes.io/restartedAt: "2025-12-01T07:10:00Z" # 이전 값보다 새로운 값으로 변경
     spec:
       containers:
         - name: frontend
