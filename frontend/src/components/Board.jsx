@@ -67,14 +67,25 @@ function Board({ user, onLogout }) {
             });
 
             if (!res.ok) {
+                // 💡 서버에서 400 Bad Request가 왔을 때 (서버리스 필터링 실패)
+                const errorBody = await res.json();
+                
+                // 💡 1. 서버가 보낸 message 필드를 추출하여 에러 메시지로 사용
+                if (errorBody && errorBody.message) {
+                    throw new Error(errorBody.message);
+                }
+                
+                // 💡 2. 일반적인 HTTP 오류 메시지 (404 등)
                 throw new Error(`Failed to save post: ${res.status}`);
             }
 
             setForm({ title: "", content: "", author: "" });
             setEditingId(null);
-            await loadPosts();
+            // 💡 중요: POST/PUT 성공 시에만 목록을 다시 불러옵니다.
+            await loadPosts(); 
         } catch (err) {
             console.error(err);
+            // 💡 catch 블록이 이제 서버에서 보낸 메시지를 출력합니다.
             setError(err.message || "게시글 저장 중 오류가 발생했습니다.");
         }
     };
