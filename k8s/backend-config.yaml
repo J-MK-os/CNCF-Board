@@ -1,0 +1,16 @@
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: backend-backendconfig 
+  namespace: cncf-board # Deployment 및 Service와 동일한 네임스페이스
+spec:
+  healthCheck:
+    # Pod가 리스닝하는 포트와 동일하게 설정 (8080)
+    port: 8080 
+    # Pod가 응답하는 헬스 체크 경로를 설정 (루트 경로 '/')
+    requestPath: /
+    type: HTTP
+    timeoutSec: 5
+    checkIntervalSec: 5
+    healthyThreshold: 2
+    unhealthyThreshold: 2
