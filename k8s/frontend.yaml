@@ -12,13 +12,10 @@ spec:
     metadata:
       labels:
         app: frontend
-      annotations:
-        kubectl.kubernetes.io/restartedAt: "2025-12-01T07:58:00Z" # 현재 시간으로 값 변경
     spec:
       containers:
         - name: frontend
           image: jungmk0720/cncf-frontend:latest
-          # 이미지 캐시 무시 (image와 같은 레벨)
           imagePullPolicy: Always
           ports:
             - containerPort: 80
@@ -41,6 +38,39 @@ spec:
   selector:
     app: frontend
   ports:
-    - port: 80      # 클러스터 내부에서 쓰는 포트
-      targetPort: 80  # 컨테이너 포트
-  type: ClusterIP     # NodePort → ClusterIP로 변경
+    - name: http
+      port: 80
+      targetPort: 80      
+  type: ClusterIP
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: board-ingress
+  namespace: cncf-board
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+spec:
+  defaultBackend:
+    service:
+      name: frontend
+      port:
+        number: 80
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 8080
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
