@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PostForm from "./PostForm";
 import PostList from "./PostList";
 
-const API_BASE = process.env.REACT_APP_API_BASE || "";
+const API_BASE = "http://localhost:8080"; 
 
 function Board({ user, onLogout }) {
     const [posts, setPosts] = useState([]);
@@ -20,6 +20,7 @@ function Board({ user, onLogout }) {
             setLoading(true);
             setError(null);
 
+            
             const res = await fetch(`${API_BASE}/api/posts`);
             if (!res.ok) {
                 throw new Error(`Failed to fetch posts: ${res.status}`);
