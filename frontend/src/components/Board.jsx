@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PostForm from "./PostForm";
 import PostList from "./PostList";
 
-const API_BASE = "http://34.8.21.255"; 
+const API_BASE = ""; 
 
 function Board({ user, onLogout }) {
     const [posts, setPosts] = useState([]);
