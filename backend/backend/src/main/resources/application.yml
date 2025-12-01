@@ -27,3 +27,9 @@ management:
 
 server:
   port: 8080
+
+# Cloud Run Serverless Function URL 설정
+cloud:
+  run:
+    profanity-filter:
+      url: https://serverless-function-307549381524.asia-northeast3.run.app/filter
