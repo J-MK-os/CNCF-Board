@@ -153,18 +153,20 @@ function Intro({ onEnterGuest, onLoginSuccess }) {
     return (
         <div style={styles.container}>
             <div style={styles.card}>
-                <h1 style={styles.title}>CNCF Team Project</h1>
+                <h1 style={styles.title}>CNCF 14팀</h1>
                 
                 <div style={{ marginBottom: "20px" }}>
                     <span style={styles.techStack}>Spring Boot</span>{" "}
                     <span style={styles.techStack}>React</span>{" "}
                     <span style={styles.techStack}>K8s</span>{" "}
                     <span style={styles.techStack}>ArgoCD</span>
+                    <span style={styles.techStack}>Prometheus/Grafana</span>
+                    <span style={styles.techStack}>Serverless Function</span>
                 </div>
 
                 <p style={styles.description}>
-                    Cloud Native 환경에서 구축된<br />
-                    보안 및 확장성 중심의 게시판 서비스입니다.
+                    CNCF 기말 발표<br />
+                    CRUD가 가능한 게시판입니다.
                 </p>
 
                 <div style={styles.buttonGroup}>
