@@ -5,11 +5,11 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # 의존성 파일 복사 및 설치
-COPY serverless_function/requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 애플리케이션 파일 복사
-COPY serverless_function/main.py .
+COPY main.py .
 
 # Cloud Run은 PORT 환경 변수를 사용합니다.
 ENV PORT 8080
