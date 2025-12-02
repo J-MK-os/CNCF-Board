@@ -51,4 +51,4 @@ jobs:
           file: ./frontend/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/cncf-frontend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/cncf-frontend:design-v3
